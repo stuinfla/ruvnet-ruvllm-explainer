@@ -1,0 +1,94 @@
+<svg id="sd-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1110 664" width="1110" height="664" role="img" aria-labelledby="sd-t sd-d">
+<title id="sd-t">How RuVLLM is wired</title>
+<desc id="sd-d">Base model, Task panel, Keep rule feed RuVLLM (Freeze, Change a copy, Measure in pairs, Decide and restore), which drives Keep or reject verdict, Every raw answer, Original, byte for byte, GPU spend, capped. Works with — npm CLI: works; Vast.ai GPUs: works; Claude Code: works; Ruflo: works; Apple Silicon: works.</desc>
+<style>
+    #sd-map text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    #sd-map .sd-ttl { font-size: 24px; font-weight: 700; fill: #f0f6fc; }
+    #sd-map .sd-sub { font-size: 13px; fill: #8b949e; }
+    #sd-map .sd-h { font-size: 16px; font-weight: 700; fill: #f0f6fc; }
+    #sd-map .sd-s { font-size: 13px; fill: #8b949e; }
+    #sd-map .sd-head { font-size: 11px; letter-spacing: 1.6px; fill: #8b949e; font-weight: 700; }
+    #sd-map .sd-pill { font-size: 14px; font-weight: 700; }
+    #sd-map .sd-code { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #79c0ff; }
+    #sd-map .sd-num { font-size: 12px; font-weight: 700; fill: #0d1117; }
+    #sd-map .sd-flow { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 6 9; }
+    
+    @media (prefers-reduced-motion: no-preference) { #sd-map .sd-flow { animation: sd-map-flowk 2.6s ease-in-out infinite; } }
+    @keyframes sd-map-flowk { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  </style>
+<rect x="1" y="1" width="1108" height="662" rx="16" fill="#0d1117" stroke="#30363d"/>
+<text class="sd-ttl" x="40" y="48">How RuVLLM is wired</text>
+<text class="sd-head" x="40" y="104">INPUTS</text>
+<rect x="40" y="116" width="210" height="78" rx="10" fill="#161b22" stroke="#30363d"/>
+<circle cx="64" cy="147" r="7" fill="#f85149"/>
+<text class="sd-h" x="82" y="143">Base model</text>
+<text class="sd-s" x="82" y="163">Qwen3.5 4B, pinned, never</text>
+<text class="sd-s" x="82" y="179">edited</text>
+<path class="sd-flow" stroke="#8b949e" d="M 250 147 C 290 147, 290 301, 330 301"/>
+<rect x="40" y="208" width="210" height="78" rx="10" fill="#161b22" stroke="#30363d"/>
+<circle cx="64" cy="239" r="7" fill="#d29922"/>
+<text class="sd-h" x="82" y="235">Task panel</text>
+<text class="sd-s" x="82" y="255">256 tasks, tool use and</text>
+<text class="sd-s" x="82" y="271">arithmetic</text>
+<path class="sd-flow" stroke="#8b949e" d="M 250 239 C 290 239, 290 313, 330 313"/>
+<rect x="40" y="300" width="210" height="78" rx="10" fill="#161b22" stroke="#30363d"/>
+<circle cx="64" cy="331" r="7" fill="#3fb950"/>
+<text class="sd-h" x="82" y="327">Keep rule</text>
+<text class="sd-s" x="82" y="347">written before any output</text>
+<text class="sd-s" x="82" y="363">exists</text>
+<path class="sd-flow" stroke="#8b949e" d="M 250 331 C 290 331, 290 325, 330 325"/>
+<rect x="40" y="394" width="210" height="62" rx="10" fill="none" stroke="#30363d" stroke-dasharray="4 4"/>
+<text class="sd-s" x="56" y="420">All three are frozen into a</text>
+<text class="sd-s" x="56" y="440">SHA-256-pinned bundle.</text>
+<rect x="330" y="104" width="330" height="418" rx="14" fill="#161b22" stroke="#3fb950" stroke-width="1.6"/>
+<text class="sd-h" x="352" y="136">RuVLLM</text>
+<rect x="352" y="172" width="286" height="62" rx="10" fill="#0d1117" stroke="#30363d"/>
+<circle cx="376" cy="203" r="11" fill="#4493c9"/><text class="sd-num" x="376" y="207" text-anchor="middle">1</text>
+<text class="sd-h" x="398" y="199">Freeze</text>
+<text class="sd-s" x="398" y="219">Pin model, tasks, settings and rule</text>
+<path d="M 495 237 L 495 253 M 489 247 L 495 254 L 501 247" stroke="#8b949e" stroke-width="2" fill="none" stroke-linecap="round"/>
+<rect x="352" y="256" width="286" height="62" rx="10" fill="#0d1117" stroke="#30363d"/>
+<circle cx="376" cy="287" r="11" fill="#d29922"/><text class="sd-num" x="376" y="291" text-anchor="middle">2</text>
+<text class="sd-h" x="398" y="283">Change a copy</text>
+<text class="sd-s" x="398" y="303">LoRA adapter or bounded Rust edit</text>
+<path d="M 495 321 L 495 337 M 489 331 L 495 338 L 501 331" stroke="#8b949e" stroke-width="2" fill="none" stroke-linecap="round"/>
+<rect x="352" y="340" width="286" height="62" rx="10" fill="#0d1117" stroke="#30363d"/>
+<circle cx="376" cy="371" r="11" fill="#3fb950"/><text class="sd-num" x="376" y="375" text-anchor="middle">3</text>
+<text class="sd-h" x="398" y="367">Measure in pairs</text>
+<text class="sd-s" x="398" y="387">Same tasks, same GPU, per-task test</text>
+<path d="M 495 405 L 495 421 M 489 415 L 495 422 L 501 415" stroke="#8b949e" stroke-width="2" fill="none" stroke-linecap="round"/>
+<rect x="352" y="424" width="286" height="78" rx="10" fill="#0d1117" stroke="#30363d"/>
+<circle cx="376" cy="455" r="11" fill="#a371f7"/><text class="sd-num" x="376" y="459" text-anchor="middle">4</text>
+<text class="sd-h" x="398" y="451">Decide and restore</text>
+<text class="sd-s" x="398" y="471">Apply the rule, prove the original</text>
+<text class="sd-s" x="398" y="487">returns</text>
+<text class="sd-head" x="770" y="104">OUTPUTS</text>
+<rect x="770" y="116" width="300" height="80" rx="10" fill="#161b22" stroke="#30363d"/>
+<text class="sd-h" x="790" y="146">Keep or reject verdict</text>
+<text class="sd-code" x="790" y="166">exact McNemar p</text>
+<path class="sd-flow" stroke="#3fb950" d="M 660 313 C 720 313, 720 156, 770 156"/>
+<rect x="770" y="217" width="300" height="80" rx="10" fill="#161b22" stroke="#30363d"/>
+<text class="sd-h" x="790" y="247">Every raw answer</text>
+<text class="sd-code" x="790" y="267">re-scored locally</text>
+<path class="sd-flow" stroke="#3fb950" d="M 660 313 C 720 313, 720 257, 770 257"/>
+<rect x="770" y="318" width="300" height="80" rx="10" fill="#161b22" stroke="#30363d"/>
+<text class="sd-h" x="790" y="348">Original, byte for byte</text>
+<text class="sd-code" x="790" y="368">hash match</text>
+<path class="sd-flow" stroke="#3fb950" d="M 660 313 C 720 313, 720 358, 770 358"/>
+<rect x="770" y="419" width="300" height="80" rx="10" fill="#161b22" stroke="#30363d"/>
+<text class="sd-h" x="790" y="449">GPU spend, capped</text>
+<text class="sd-code" x="790" y="469">under $1 a run</text>
+<path class="sd-flow" stroke="#3fb950" d="M 660 313 C 720 313, 720 459, 770 459"/>
+<rect x="40" y="546" width="1030" height="90" rx="14" fill="#161b22" stroke="#30363d"/>
+<text class="sd-head" x="64" y="576">WORKS WITH</text>
+<rect x="64" y="588" width="106" height="36" rx="18" fill="#12261a" stroke="#3fb950"/>
+<text class="sd-pill" x="117" y="611" text-anchor="middle" fill="#3fb950">✓ npm CLI</text>
+<rect x="184" y="588" width="145" height="36" rx="18" fill="#12261a" stroke="#3fb950"/>
+<text class="sd-pill" x="256.5" y="611" text-anchor="middle" fill="#3fb950">✓ Vast.ai GPUs</text>
+<rect x="343" y="588" width="137" height="36" rx="18" fill="#12261a" stroke="#3fb950"/>
+<text class="sd-pill" x="411.5" y="611" text-anchor="middle" fill="#3fb950">✓ Claude Code</text>
+<rect x="494" y="588" width="91" height="36" rx="18" fill="#12261a" stroke="#3fb950"/>
+<text class="sd-pill" x="539.5" y="611" text-anchor="middle" fill="#3fb950">✓ Ruflo</text>
+<rect x="599" y="588" width="153" height="36" rx="18" fill="#12261a" stroke="#3fb950"/>
+<text class="sd-pill" x="675.5" y="611" text-anchor="middle" fill="#3fb950">✓ Apple Silicon</text>
+</svg>

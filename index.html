@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ruvllm — Change a model. Prove it. Keep the original</title>
+  <meta name="description" content="Change a model. Prove it. Keep the original.">
+  <meta name="author" content="Independent explainer for ruvnet's ruvllm — built by Stuart Kerr at ISOvision.ai">
+  <link rel="canonical" href="https://ruvllm-explainer.netlify.app/">
+  <meta name="theme-color" content="#C23A22">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ruvllm — Change a model. Prove it. Keep the original">
+  <meta property="og:description" content="Change a model. Prove it. Keep the original.">
+  <meta property="og:url" content="https://ruvllm-explainer.netlify.app/">
+  <meta property="og:image" content="https://ruvllm-explainer.netlify.app/assets/social-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ruvllm — Change a model. Prove it. Keep the original">
+  <meta name="twitter:description" content="Change a model. Prove it. Keep the original.">
+  <meta name="twitter:image" content="https://ruvllm-explainer.netlify.app/assets/social-card.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/favicon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
+  <link rel="icon" href="assets/favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "ruvllm",
+  "description": "Change a model. Prove it. Keep the original.",
+  "url": "https://ruvllm-explainer.netlify.app/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Cross-platform",
+  "image": "https://ruvllm-explainer.netlify.app/assets/social-card.png",
+  "author": {
+    "@type": "Person",
+    "name": "ruvnet"
+  },
+  "codeRepository": "https://github.com/ruvnet/ruvllm",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+  </script>
+  <link rel="stylesheet" href="ask/ask.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="prov-banner">
+    <div class="wrap prov-banner-inner">
+      <p class="prov-attr">An independent explainer for <strong>ruvnet</strong>'s <a href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener">ruvllm</a> — built to help you actually implement it.</p>
+      <p class="prov-live"><span class="prov-dot" aria-hidden="true">&#9679;</span> source <a href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener"><code>github.com/ruvnet/ruvllm</code></a></p>
+    </div>
+  </div>
+  <header class="site-head">
+    <div class="wrap">
+      <a class="brand" href="#top" aria-label="ruvllm explainer home">
+        <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="3" y="3" width="26" height="26" rx="8" fill="none" stroke="var(--accent)" stroke-width="2"></rect>
+        <rect x="9" y="9" width="14" height="14" rx="4" fill="var(--accent-2)"></rect>
+        <circle cx="16" cy="16" r="3" fill="var(--on-accent)"></circle>
+      </svg>
+        <span>ruvllm</span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#ask">Ask</a>
+        <a href="#what-it-is">What it is</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#get-started">Get started</a>
+        <a href="#the-pack">AI pack</a>
+        <a href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener">GitHub &#8599;</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+
+  <a id="top"></a>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">Change an AI model, with receipts</span>
+          <h1>Make an AI model better at a job. Prove it worked. Keep the original.</h1>
+          <p class="lede">Open AI models can be tuned for one narrow job, like using coding tools. The hard part is knowing whether the tuning really helped. RuVLLM builds a small add-on for the model. Then it tests the add-on against the untouched model on the same questions. A rule written before anyone saw the scores decides whether to keep it.</p>
+          <p class="sub">No more marking your own homework. The original model always comes back exactly as it was, and a check proves it.</p>
+          <p class="attrib-lede">An <strong>independent explainer</strong> for <strong>rUv <span class="attrib-handle">(ruvnet)</span></strong>'s <a href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener">ruvllm</a> — built to take you from "never seen it" to "ready to implement".</p>
+          <div class="cta-row">
+          <a class="cta" href="#get-started">Get started</a>
+          <a class="cta ghost" href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+        <div class="meta-row"><span><b>Languages</b> JavaScript (npm), Python and Rust</span><span><b>Parts</b> 2 components</span><span><b>Proven so far</b> One model family, 256 test tasks</span></div>
+        </div>
+        <figure class="hero-art">
+          <button type="button" class="diagram-zoom" data-src="assets/hero.png" data-alt="ruvllm: A cream paper desk seen from above. On the left, a printed master sheet is a fine grid of weight cells with a hash in the corner (a3f9…). A frosted vellum sheet lies across it, carrying a handful of red-ink marks. These marks are far fewer than the grid cells, since an adapter is tiny next to the base model. Top right, a closed envelope has a red wax seal stamped with the same kind of hash, and a tag reads 'sealed before any output'. Under both, a ledger of 24 ruled task rows has two empty tick-boxes each, headed BASE and CANDIDATE." aria-label="Enlarge: ruvllm: A cream paper desk seen from above. On the left, a printed master sheet is a fine grid of weight cells with a hash in the corner (a3f9…). A frosted vellum sheet lies across it, carrying a handful of red-ink marks. These marks are far fewer than the grid cells, since an adapter is tiny next to the base model. Top right, a closed envelope has a red wax seal stamped with the same kind of hash, and a tag reads 'sealed before any output'. Under both, a ledger of 24 ruled task rows has two empty tick-boxes each, headed BASE and CANDIDATE."><picture><source type="image/avif" srcset="assets/hero-480.avif 480w, assets/hero-960.avif 960w, assets/hero-1440.avif 1440w" sizes="(max-width: 640px) calc(100vw - 32px), 560px"><img src="assets/hero-960.jpg" srcset="assets/hero-480.jpg 480w, assets/hero-960.jpg 960w, assets/hero-1440.jpg 1440w" sizes="(max-width: 640px) calc(100vw - 32px), 560px" width="1536" height="1024" alt="ruvllm: A cream paper desk seen from above. On the left, a printed master sheet is a fine grid of weight cells with a hash in the corner (a3f9…). A frosted vellum sheet lies across it, carrying a handful of red-ink marks. These marks are far fewer than the grid cells, since an adapter is tiny next to the base model. Top right, a closed envelope has a red wax seal stamped with the same kind of hash, and a tag reads 'sealed before any output'. Under both, a ledger of 24 ruled task rows has two empty tick-boxes each, headed BASE and CANDIDATE." fetchpriority="high"></picture></button>
+        </figure>
+      </div>
+    </div>
+  </section>
+    <section class="overview-band" data-overview aria-label="A 75-second narrated overview of ruvllm">
+    <div class="wrap"><figure class="overview-fig">
+      <video controls preload="metadata" playsinline poster="assets/overview-poster.jpg" width="1280" height="720"><source src="assets/overview.mp4" type="video/mp4">Your browser can't play this video. <a href="assets/overview.mp4" target="_blank" rel="noopener">Open the 75-second overview</a>.</video>
+      <figcaption>The 75-second narrated overview, made with Google NotebookLM from the repo. It is a machine-made summary, so treat the sections below and <a href="https://github.com/ruvnet/ruvllm" target="_blank" rel="noopener">the repo</a> as the source of truth.</figcaption>
+    </figure>
+    <figure class="overview-fig"><img src="assets/overview-infographic.jpg" alt="Infographic summarising how ruvllm works" loading="lazy" style="width:100%;height:auto;border-radius:18px;margin-top:18px"></figure></div>
+  </section>
+  <style>.overview-band{padding:0 0 28px}.overview-fig{margin:0}.overview-fig video{display:block;width:100%;height:auto;border-radius:18px;background:#000}.overview-fig figcaption{font-size:.95rem;margin-top:10px;opacity:.8}</style>
+  <div class="sections">
+      <div class="wrap">
+    <details class="section" id="problem" open>
+      <summary>
+        <span class="num">01</span>
+        <span class="head-text">
+          <h2>Getting better is easy to fake</h2>
+          <span class="q">Why is improving an AI model so easy to get wrong?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">You tweak an AI model, try it a few times, and it seems smarter. Can you trust that feeling?</p>
+      <p>Imagine coaching a friend for a spelling bee. After a week, they ace the practice words you picked. Are they really better? Maybe those words were easy. Maybe they got worse at math while they practiced spelling.</p>
+      <p>Tuning an AI model has the same trap. People choose the test questions after seeing the results. They compare two averages and keep whatever looks good. It is like grading your own homework and being very pleased with the A.</p>
+      <p>A big gain in one place can quietly hide a loss somewhere else.</p>
+      <p>There is a second pain. Many people edit the model itself. If the edit turns out bad, the good original is gone, and there is no way back. Nobody enjoys that moment.</p>
+      
+      <figure class="figure">
+        <span class="tier friendly">The problem</span>
+        <button type="button" class="diagram-zoom" data-src="assets/problem.png" data-alt="The average score rose from 82 percent for the base model to 93 percent for coding-4b-r2, while arithmetic fell from 62 to 46 of 64: sixteen answers gone, hidden behind the average." aria-label="Enlarge: The average score rose from 82 percent for the base model to 93 percent for coding-4b-r2, while arithmetic fell from 62 to 46 of 64: sixteen answers gone, hidden behind the average."><picture><source type="image/avif" srcset="assets/problem-480.avif 480w, assets/problem-960.avif 960w, assets/problem-1440.avif 1440w" sizes="(max-width: 640px) calc(100vw - 32px), 720px"><img src="assets/problem-960.jpg" srcset="assets/problem-480.jpg 480w, assets/problem-960.jpg 960w, assets/problem-1440.jpg 1440w" sizes="(max-width: 640px) calc(100vw - 32px), 720px" width="1600" height="1920" alt="The average score rose from 82 percent for the base model to 93 percent for coding-4b-r2, while arithmetic fell from 62 to 46 of 64: sixteen answers gone, hidden behind the average." loading="lazy" decoding="async"></picture></button>
+      </figure>
+      </div>
+    </details>
+
+    <details class="section" id="what-it-is" open>
+      <summary>
+        <span class="num">02</span>
+        <span class="head-text">
+          <h2>A safe way to improve a model, and show your work</h2>
+          <span class="q">What exactly is this thing?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">RuVLLM lets you improve an open AI model without gambling on it. Think of a clothing store fitting room: try the new outfit on, and the original stays on its hanger.</p>
+      <p>It trains a small add-on. That is a tiny set of extra numbers that sits on top of the model and nudges how it behaves. The original model is never touched.</p>
+      <p>Then it runs the plain model and the model with the add-on on identical questions. Every answer is saved. Nothing is thrown away.</p>
+      <p>In the repo's own recorded runs, one add-on was kept and a second one was rejected. That is the system working as intended.</p>
+      
+      <figure class="figure diagram concept">
+        <span class="tier tech">The big idea</span>
+        <button type="button" class="diagram-zoom" data-src="assets/big-idea.svg" data-src-m="assets/big-idea.m.svg" data-alt="Passes per tool family and for arithmetic for base, coding-4b and coding-4b-r2. coding-4b learned grep (0 to 24) and test (8 to 24) but broke write (21 to 8). coding-4b-r2 fixed write and scored 192 of 192 on tools, but arithmetic fell from 62 to 46 of 64. Fixing one thing broke another, and only a per-task paired rule saw it." aria-label="Enlarge: Passes per tool family and for arithmetic for base, coding-4b and coding-4b-r2. coding-4b learned grep (0 to 24) and test (8 to 24) but broke write (21 to 8). coding-4b-r2 fixed write and scored 192 of 192 on tools, but arithmetic fell from 62 to 46 of 64. Fixing one thing broke another, and only a per-task paired rule saw it."><picture><source media="(max-width: 640px)" srcset="assets/big-idea.m.svg"><img src="assets/big-idea.svg" alt="Passes per tool family and for arithmetic for base, coding-4b and coding-4b-r2. coding-4b learned grep (0 to 24) and test (8 to 24) but broke write (21 to 8). coding-4b-r2 fixed write and scored 192 of 192 on tools, but arithmetic fell from 62 to 46 of 64. Fixing one thing broke another, and only a per-task paired rule saw it." loading="lazy"></picture></button>
+      </figure>
+      
+      <table class="tbl"><caption class="visually-hidden">What you get</caption>
+        <thead><tr><th>Aspect</th><th>Detail</th></tr></thead>
+        <tbody>
+        <tr><td>What changes</td><td>A copy of the model, never the original</td></tr>
+        <tr><td>How it is judged</td><td>Same questions for both versions, with a keep-or-reject rule fixed in advance</td></tr>
+        <tr><td>What you keep</td><td>Every raw answer, the scores, and a way to re-score on your own computer</td></tr>
+        <tr><td>Honest status</td><td>Measured on one open model so far. It is not approved for real-world use</td></tr>
+        </tbody>
+      </table>
+      </div>
+    </details>
+
+    <details class="section" id="the-insight" open>
+      <summary>
+        <span class="num">03</span>
+        <span class="head-text">
+          <h2>The clever move: write the rules before the game</h2>
+          <span class="q">What is the clever move?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">Two ideas make the proof hard to fudge. Picture calling your shot in pool before you hit the ball.</p>
+      <p>First, the questions, the right answers and the keep-or-reject rule are locked before the model answers anything. Nobody can shift the goalposts after seeing a score.</p>
+      <p>Second, the old and new versions answer the very same questions. For each question, you ask who got it right. You count how many the add-on fixed and how many it broke.</p>
+      <p>The repo's own second try shows why this matters. The add-on fixed every tool mistake. But it forgot how to add, and lost 16 math answers. The locked rule said math must not get worse, so it was rejected. Nobody had to argue about it.</p>
+      
+      <figure class="figure diagram concept">
+        <span class="tier tech">The aha</span>
+        <button type="button" class="diagram-zoom" data-src="assets/insight.svg" data-src-m="assets/insight.m.svg" data-alt="coding-4b-r2 passed all 192 tool tasks, the best score of the three runs, and was rejected anyway: arithmetic fell from 62 to 46 of 64, breaking the rule sealed before any answer existed, that capability anchors must not regress." aria-label="Enlarge: coding-4b-r2 passed all 192 tool tasks, the best score of the three runs, and was rejected anyway: arithmetic fell from 62 to 46 of 64, breaking the rule sealed before any answer existed, that capability anchors must not regress."><picture><source media="(max-width: 640px)" srcset="assets/insight.m.svg"><img src="assets/insight.svg" alt="coding-4b-r2 passed all 192 tool tasks, the best score of the three runs, and was rejected anyway: arithmetic fell from 62 to 46 of 64, breaking the rule sealed before any answer existed, that capability anchors must not regress." loading="lazy"></picture></button>
+      </figure>
+      <p class="oh">Call your shot before you take it, and the scoreboard cannot be talked into agreeing with you.</p>
+      </div>
+    </details>
+
+    <details class="section" id="how-it-works" open>
+      <summary>
+        <span class="num">04</span>
+        <span class="head-text">
+          <h2>Freeze, change a copy, measure in pairs, decide</h2>
+          <span class="q">How does it work, step by step?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">The workflow has four steps. Each one is checked by saved evidence.</p>
+      <p>Freeze: the model version, the task list, the answer settings and the keep rule are sealed in a bundle. The bundle gets a SHA-256 fingerprint (a short code that changes if even one character changes). Prepared tasks cover eight families of coding-tool use, with 24 cases each. Arithmetic is a separate check that the model's general skills have not slipped.</p>
+      <p>Change a copy: there are two ways. A LoRA adapter (a small add-on trained while the base model stays frozen) is the main one. The included add-on, coding-4b, has about 1.5 million trainable numbers. The other way is a direct weight edit. A Rust program changes specific values inside a copy, within a strict policy.</p>
+      <p>Measure in pairs: both versions run on the same graphics card (the chip AI models run on). Gains and losses are checked with an exact McNemar test. That test looks only at questions where the two versions disagree. On the held-out panel, coding-4b went from 149 to 176 of 192 tool passes, with 40 gains and 13 losses. Arithmetic went from 62 to 64.</p>
+      <p>Decide and restore: the frozen rule says keep or reject. The Rust engine then proves the original comes back by matching fingerprints. Rented graphics cards run under four spending limits and a separate self-destruct timer, so a forgotten rental cannot eat your wallet. Recorded runs cost between $0.27 and $0.91 each. A job counts as done only when a re-score on your own machine matches.</p>
+      <div class="dual dual-diagrams">
+      <figure class="figure diagram">
+        <span class="tier tech">Architecture</span>
+        <button type="button" class="diagram-zoom" data-src="assets/architecture.svg" data-src-m="assets/architecture.m.svg" data-alt="How RuVLLM is wired. Base model, Task panel, Keep rule feed RuVLLM (Freeze, Change a copy, Measure in pairs, Decide and restore), which drives Keep or reject verdict, Every raw answer, Original, byte for byte, GPU spend, capped. Works with — npm CLI: works; Vast.ai GPUs: works; Claude Code: works; Ruflo: works; Apple Silicon: works." aria-label="Enlarge: How RuVLLM is wired. Base model, Task panel, Keep rule feed RuVLLM (Freeze, Change a copy, Measure in pairs, Decide and restore), which drives Keep or reject verdict, Every raw answer, Original, byte for byte, GPU spend, capped. Works with — npm CLI: works; Vast.ai GPUs: works; Claude Code: works; Ruflo: works; Apple Silicon: works."><picture><source media="(max-width: 640px)" srcset="assets/architecture.m.svg"><img src="assets/architecture.svg" alt="How RuVLLM is wired. Base model, Task panel, Keep rule feed RuVLLM (Freeze, Change a copy, Measure in pairs, Decide and restore), which drives Keep or reject verdict, Every raw answer, Original, byte for byte, GPU spend, capped. Works with — npm CLI: works; Vast.ai GPUs: works; Claude Code: works; Ruflo: works; Apple Silicon: works." loading="lazy"></picture></button>
+        <figcaption>RuVLLM freezes the inputs, edits only a copy, measures in pairs, then proves the original restores.</figcaption>
+      </figure>
+      <figure class="figure diagram">
+        <span class="tier tech">Data flow</span>
+        <button type="button" class="diagram-zoom" data-src="assets/flow.svg" data-src-m="assets/flow.m.svg" data-alt="The moment RuVLLM picks one. base at 97 percent (active, over the line); coding-4b at 100 percent (picked); coding-4b-r2 at 72 percent (skipped). Rule frozen first. Compare on identical tasks. Keep or reject. Numbers are illustrative." aria-label="Enlarge: The moment RuVLLM picks one. base at 97 percent (active, over the line); coding-4b at 100 percent (picked); coding-4b-r2 at 72 percent (skipped). Rule frozen first. Compare on identical tasks. Keep or reject. Numbers are illustrative."><picture><source media="(max-width: 640px)" srcset="assets/flow.m.svg"><img src="assets/flow.svg" alt="The moment RuVLLM picks one. base at 97 percent (active, over the line); coding-4b at 100 percent (picked); coding-4b-r2 at 72 percent (skipped). Rule frozen first. Compare on identical tasks. Keep or reject. Numbers are illustrative." loading="lazy"></picture></button>
+        <figcaption>The rule rejected coding-4b-r2 even though it fixed every tool failure: arithmetic fell to 72%.</figcaption>
+      </figure>
+      </div>
+      </div>
+    </details>
+
+    <details class="section" id="use-cases" open>
+      <summary>
+        <span class="num">05</span>
+        <span class="head-text">
+          <h2>What you would do with it</h2>
+          <span class="q">How would I actually use it?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">Three jobs a real person might hand this project.</p>
+      
+      <figure class="figure">
+        <span class="tier friendly">In the real world</span>
+        <button type="button" class="diagram-zoom" data-src="assets/useCase.png" data-alt="ruvllm in use" aria-label="Enlarge: ruvllm in use"><picture><source type="image/avif" srcset="assets/useCase-480.avif 480w, assets/useCase-960.avif 960w" sizes="(max-width: 640px) calc(100vw - 32px), 720px"><img src="assets/useCase-960.jpg" srcset="assets/useCase-480.jpg 480w, assets/useCase-960.jpg 960w" sizes="(max-width: 640px) calc(100vw - 32px), 720px" width="1024" height="1024" alt="ruvllm in use" loading="lazy" decoding="async"></picture></button>
+      </figure>
+      <div class="gallery"><div class="grid">
+      <details class="case" open>
+        <summary>
+          <span class="uc-num">1</span>
+          <span class="uc-title">Make a small open model better at one job</span>
+          <span class="uc-tag">Primary use</span>
+          <span class="chev" aria-hidden="true">&rsaquo;</span>
+        </summary>
+        <div class="uc-body">
+          <p>Say you want a small model that uses coding tools more reliably. You train an add-on, run the paired comparison, and read the result. You see gains, losses and failures broken down by tool family.</p>
+      <p>You get a keep-or-reject answer you can defend. The repo's recorded run kept coding-4b, going from 123 to 173 of 192 tool passes with no losses on that panel. That is a rare thing: a before-and-after you can actually trust.</p>
+        </div>
+      </details>
+      <details class="case" open>
+        <summary>
+          <span class="uc-num">2</span>
+          <span class="uc-title">Check someone else's claim</span>
+          <span class="uc-tag">Verify</span>
+          <span class="chev" aria-hidden="true">&rsaquo;</span>
+        </summary>
+        <div class="uc-body">
+          <p>The repo ships 462 saved answers from two experiments. You can re-check them on your own laptop. No graphics card, network or account is needed. You get to play detective without leaving your desk.</p>
+      <p>The repo is clear about limits. These files do not prove best-in-the-world performance or safety. They do not authorize putting a model into real use.</p>
+        </div>
+      </details>
+      <details class="case" open>
+        <summary>
+          <span class="uc-num">3</span>
+          <span class="uc-title">Try a risky edit without fear</span>
+          <span class="uc-tag">Experiment</span>
+          <span class="chev" aria-hidden="true">&rsaquo;</span>
+        </summary>
+        <div class="uc-body">
+          <p>Think of a save point in a video game. You can let the Rust editor change specific values in a copy of a model. It records evidence and proves the original restores exactly. If the edit is bad, you just reload and lose nothing.</p>
+        </div>
+      </details>
+      </div></div>
+      </div>
+    </details>
+
+    <details class="section" id="get-started" open>
+      <summary>
+        <span class="num">06</span>
+        <span class="head-text">
+          <h2>Start by checking the evidence yourself</h2>
+          <span class="q">What do I type first, and what will I see?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">This repo has no one-line install command. It is a workbench you clone, not a package you add. The safest first step needs no graphics card, no downloads and no accounts. Nothing can break, because the check only reads files.</p>
+      <div class="install-block"><div class="cmd-block"><pre class="code-block"><code>git clone https://github.com/ruvnet/ruvllm &amp;&amp; cd ruvllm &amp;&amp; python3 scripts/verify_benchmarks.py</code></pre><button type="button" class="copy-btn" data-copy="git clone https://github.com/ruvnet/ruvllm &amp;&amp; cd ruvllm &amp;&amp; python3 scripts/verify_benchmarks.py" aria-label="Copy command" hidden>Copy</button></div></div>
+      <ol class="steps">
+        <li><strong>Check prerequisites.</strong> You need git and Python 3.11 or newer. The verifier uses only Python's built-in tools. For the Rust steps, you also need Rust installed. The repo pins its own toolchain version.</li>
+        <li><strong>Run the verifier from the repo root.</strong> Use the install command above. It only reads files and changes nothing. It checks the exact file list and the fingerprints, and it re-scores the math answers.</li>
+        <li><strong>Look for the green light.</strong> The report should show verified: true and generations_verified: 462. It should also show math_text_independently_rescored: true and generated_code_reexecuted: false. Seeing those lines means you just audited 462 saved answers yourself.</li>
+        <li><strong>Run the tests.</strong> Run python3 -B -m unittest discover -s benchmarks/tests -v. The tests work on temporary copies, so your files stay clean. Run python3 scripts/check_repository.py to check the repo's own layout.</li>
+        <li><strong>Optional: build the model editor.</strong> Go into the native/ folder. Run cargo build --locked --release --bin weight_evolution, then cargo test --locked -p ruvllm-weight-evolution --lib. You end up with a built editor and passing Rust tests.</li>
+        <li><strong>What you have now.</strong> You have personally confirmed the saved results. You also have a working copy of the repo, and optionally the built editor.</li>
+        <li><strong>Next step.</strong> To run your own comparison, read the paired-measurement guide in experiments/model-improvement. It starts with python3 experiments/model-improvement/prepare.py --out followed by a new absolute folder path, which freezes the 256 tasks. Running it for real needs a rented graphics card, so set a spending cap first.</li>
+      </ol>
+      </div>
+    </details>
+
+    <details class="section" id="the-pack" open>
+      <summary>
+        <span class="num">07</span>
+        <span class="head-text">
+          <h2>Take the map with you</h2>
+          <span class="q">Where can I take the whole map with me?</span>
+        </span>
+        <span class="chev" aria-hidden="true">&rsaquo;</span>
+      </summary>
+      <div class="body">
+      <p class="lead-in">The knowledge pack holds the indexed passages from this repo: its readme, protocols and evidence notes. Load it into your own tools and ask questions offline.</p>
+      <div class="tree" style="white-space:pre"><span class="cmt"># ruvllm-knowledge-pack.zip</span>
+<span class="d">for-ai/</span>            <span class="cmt"># wire this into your agent</span>
+  <span class="f">ruvllm-kb.rvf</span>            <span class="cmt"># 384-dim vector brain (semantic search)</span>
+  <span class="f">ruvllm-kb.passages.jsonl</span> <span class="cmt"># full passage text (search returns TEXT)</span>
+  <span class="f">ruvllm-symbols.json</span>      <span class="cmt"># exact public API</span>
+  <span class="f">ruvllm-dep-graph.json</span>    <span class="cmt"># what depends on what</span>
+  <span class="f">ruvllm-entrypoints.json</span>  <span class="cmt"># build / test / run commands</span>
+  <span class="f">ask-kb.mjs</span> · <span class="f">kb-mcp-server.mjs</span>  <span class="cmt"># CLI + MCP search server</span>
+<span class="d heart">for-humans/</span>        <span class="cmt"># read first</span>
+  <span class="f heart">ruvllm-primer.md</span>      <span class="cmt"># the human orientation</span></div>
+      <div class="dl-cta"><a class="cta" href="ruvllm-knowledge-pack.zip" download>Download the knowledge pack</a><span class="dl-meta">RVF vector KB + MCP server — drop it into your own agent.</span></div>
+      <a class="dropzone" href="ruvllm-knowledge-pack.zip" download><span class="dz-icon" aria-hidden="true">&darr;</span><strong>Give your AI the same understanding</strong><span class="dz-hint">ruvllm-knowledge-pack.zip</span></a>
+      </div>
+    </details>
+      </div>
+    </div>
+  </main>
+
+  <!-- ask:begin -->
+<section class="ask" id="ask" aria-labelledby="ask-h" data-index="ask/index.json" data-repo="ruvnet/ruvllm" data-name="ruvllm" data-fn="https://explainmyrepo-ask.netlify.app/api/ask" data-token="cnV2bGxtLWV4cGxhaW5lci5uZXRsaWZ5LmFwcA.4XdAWmVNovrJHB0SANW3W9OEvX7alI8l0hjkMnamv5M">
+  <div class="ask-card">
+    <span class="ask-eyebrow">Still curious?</span>
+    <h2 id="ask-h">Ask ruvllm a question.</h2>
+    <p class="ask-sub">Ask in your own words. You get a short written answer, with links to the exact files it used.</p>
+    <form class="ask-form" role="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input class="ask-input" type="text" aria-label="Ask a question about ruvllm" placeholder="Try: Where does the training data come from?" autocomplete="off" enterkeyhint="search"><button class="ask-go" type="submit">Ask</button></form>
+    <div class="ask-chips"><button type="button" class="ask-chip">Where does the training data come from?</button><button type="button" class="ask-chip">How do scheduled GPU runs keep passwords and secrets safe?</button><button type="button" class="ask-chip">What did the cloud model comparison actually find?</button><button type="button" class="ask-chip">Which licenses cover the code and the data?</button></div>
+    <div class="ask-out" aria-live="polite"><div class="ask-scan"><i></i><span></span></div><div class="ask-ans"></div></div>
+  </div>
+</section>
+<button class="ask-fab" type="button" aria-label="Ask a question about ruvllm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Ask</span></button>
+<!-- ask:end -->
+<footer class="explainer-footer" role="contentinfo">
+    <div class="wrap explainer-footer-inner">
+      <p class="ef-credit">
+        Explainer page created by <strong><a href="https://stuart-kerr-card.netlify.app" rel="author noopener" target="_blank">Stuart Kerr</a></strong> at
+        <a href="https://isovision.ai" rel="noopener" target="_blank">ISOvision</a>
+        <span class="ef-fine">Built with the open-source <a href="https://github.com/stuinfla/Repo-Explainer" rel="noopener" target="_blank">explainmyrepo</a> engine.
+        Found this valuable? <a href="https://github.com/stuinfla/Repo-Explainer" rel="noopener" target="_blank">A star on GitHub</a> genuinely helps &mdash;
+        and if something's off, <a href="https://github.com/stuinfla/Repo-Explainer/issues" rel="noopener" target="_blank">open an issue</a>: happy to help fix it.</span>
+      </p>
+      <a class="ef-cta" href="https://explainmyrepo.isovision.ai" target="_blank" rel="noopener">
+        <span class="ef-cta-lead">Would you like your own repo explainer page?</span>
+        <strong>Generate one here</strong>
+        <span class="ef-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </footer>
+  <dialog class="diagram-lightbox" id="diagram-lightbox" aria-label="Enlarged diagram">
+    <button type="button" class="lightbox-close" data-close aria-label="Close">&times;</button>
+    <img id="diagram-lightbox-img" src="" alt="">
+  </dialog>
+  <script>
+  (function () {
+    document.querySelectorAll('.copy-btn').forEach(function (b) {
+      b.hidden = false;
+      b.addEventListener('click', function () {
+        var text = b.getAttribute('data-copy') || '';
+        var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1600); };
+        if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(text).then(done, function () {}); return; }
+        var t = document.createElement('textarea'); t.value = text; document.body.appendChild(t); t.select();
+        try { document.execCommand('copy'); done(); } catch (e) {} document.body.removeChild(t);
+      });
+    });
+  })();
+  </script>
+  <script>
+  function pickLightboxSrc(phoneMatches, srcMobile, src) { return (phoneMatches && srcMobile) || src; }
+  (function () {
+    var dlg = document.getElementById('diagram-lightbox');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    var img = document.getElementById('diagram-lightbox-img');
+    document.querySelectorAll('.diagram-zoom').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        img.src = pickLightboxSrc(window.matchMedia('(max-width: 640px)').matches, btn.getAttribute('data-src-m'), btn.getAttribute('data-src'));
+        img.alt = btn.getAttribute('data-alt') || '';
+        dlg.showModal();
+      });
+    });
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg || e.target.hasAttribute('data-close')) dlg.close();
+    });
+  })();
+  </script>
+  <script src="ask/ask.js" defer></script>
+</body>
+</html>

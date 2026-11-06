@@ -1,0 +1,18 @@
+# ruvllm
+
+> Change a model. Prove it. Keep the original.
+
+Change a model. Prove it. Keep the original.
+
+This is an independent, art-directed explainer for ruvnet's ruvllm — it takes a newcomer from "never seen it" to "ready to implement", grounded in a real RVF knowledge base of the source.
+
+## What it is
+ruvllm: A master sheet and a sheet of tracing vellum. The base model is a printed master that is never touched. Every change is drawn only on a translucent vellum overlay. A wax-sealed envelope holding the keep-rule is closed before any answer is written. The two sheets are read side by side, task by task, in a paired ledger.
+
+## For your AI
+A downloadable knowledge pack (RVF vector KB + MCP server) ships with this page so your agent can search the source too: https://ruvllm-explainer.netlify.app/ruvllm-knowledge-pack.zip
+
+## Links
+- Live explainer: https://ruvllm-explainer.netlify.app/
+- Source repository: https://github.com/ruvnet/ruvllm
+- AI knowledge pack: https://ruvllm-explainer.netlify.app/ruvllm-knowledge-pack.zip

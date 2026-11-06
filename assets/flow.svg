@@ -1,0 +1,80 @@
+<svg id="sd-decision" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 572" width="1000" height="572" role="img" aria-labelledby="sd-t sd-d">
+<title id="sd-t">The moment RuVLLM picks one</title>
+<desc id="sd-d">base at 97 percent (active, over the line); coding-4b at 100 percent (picked); coding-4b-r2 at 72 percent (skipped). Rule frozen first. Compare on identical tasks. Keep or reject. Numbers are illustrative.</desc>
+<style>
+    #sd-decision text { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    #sd-decision .sd-ttl { font-size: 24px; font-weight: 700; fill: #f0f6fc; }
+    #sd-decision .sd-sub { font-size: 13px; fill: #8b949e; }
+    #sd-decision .sd-h { font-size: 16px; font-weight: 700; fill: #f0f6fc; }
+    #sd-decision .sd-s { font-size: 13px; fill: #8b949e; }
+    #sd-decision .sd-head { font-size: 11px; letter-spacing: 1.6px; fill: #8b949e; font-weight: 700; }
+    #sd-decision .sd-pill { font-size: 14px; font-weight: 700; }
+    #sd-decision .sd-code { font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; fill: #79c0ff; }
+    #sd-decision .sd-num { font-size: 12px; font-weight: 700; fill: #0d1117; }
+    #sd-decision .sd-flow { fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-dasharray: 6 9; }
+    
+    #sd-decision .sd-ring { opacity: 1; } #sd-decision .sd-act, #sd-decision .sd-actC { opacity: 0; }
+    #sd-decision .sd-fillA { transform-box: fill-box; transform-origin: bottom; }
+    @media (prefers-reduced-motion: no-preference) {
+      #sd-decision .sd-fillA { animation: sd-decision-grow 10s ease-in-out infinite; }
+      #sd-decision .sd-alert { animation: sd-decision-alert 10s ease-in-out infinite; }
+      #sd-decision .sd-mk    { animation: sd-decision-mark 10s ease-out infinite; }
+      #sd-decision .sd-pk    { animation: sd-decision-pick 10s ease-out infinite; }
+      #sd-decision .sd-ring  { animation: sd-decision-ringk 10s ease-in-out infinite; }
+      #sd-decision .sd-arc   { animation: sd-decision-arck 10s ease-in-out infinite; }
+      #sd-decision .sd-act   { animation: sd-decision-leave 10s ease-in-out infinite; }
+      #sd-decision .sd-actC  { animation: sd-decision-enter 10s ease-in-out infinite; }
+    }
+    @keyframes sd-decision-grow  { 0% { transform: scaleY(.84); } 26%, 100% { transform: scaleY(1); } }
+    @keyframes sd-decision-alert { 0%, 24% { opacity: 0; } 30% { opacity: 1; } 38% { opacity: .35; } 46%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes sd-decision-mark  { 0%, 44% { opacity: 0; } 50%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes sd-decision-pick  { 0%, 56% { opacity: 0; } 62%, 82% { opacity: 1; } 86%, 100% { opacity: 0; } }
+    @keyframes sd-decision-ringk { 0%, 56% { opacity: 0; } 64% { opacity: 1; } 72% { opacity: .55; } 80%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes sd-decision-arck  { 0%, 62% { opacity: 0; } 78%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes sd-decision-leave { 0%, 78% { opacity: 1; } 84%, 100% { opacity: 0; } }
+    @keyframes sd-decision-enter { 0%, 84% { opacity: 0; } 90%, 94% { opacity: 1; } 100% { opacity: 0; } }
+    @media (prefers-reduced-motion: no-preference) { #sd-decision .sd-flow { animation: sd-decision-flowk 2.6s ease-in-out infinite; } }
+    @keyframes sd-decision-flowk { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  </style>
+<defs><marker id="sd-ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#3fb950"/></marker></defs>
+<rect x="1" y="1" width="998" height="570" rx="16" fill="#0d1117" stroke="#30363d"/>
+<text class="sd-ttl" x="40" y="48">The moment RuVLLM picks one</text>
+<text class="sd-sub" x="40" y="72">Illustrative scale: arithmetic out of 64 shown as a percentage.</text>
+<rect x="70" y="150" width="110" height="300" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect class="sd-fillA" x="73" y="159" width="104" height="288" rx="7" fill="#f85149"/>
+<rect x="225" y="150" width="110" height="300" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="228" y="150" width="104" height="297" rx="7" fill="#3fb950"/>
+<rect x="380" y="150" width="110" height="300" rx="10" fill="#161b22" stroke="#30363d"/>
+<rect x="383" y="234" width="104" height="213" rx="7" fill="#d29922"/>
+<line x1="55" y1="159" x2="505" y2="159" stroke="#f85149" stroke-width="1.8" stroke-dasharray="7 5"/>
+<text class="sd-s" x="514" y="141" style="fill:#f85149;font-weight:700">97%</text>
+<text class="sd-s" x="514" y="155" style="font-size:12px">base arithmetic: must</text>
+<text class="sd-s" x="514" y="169" style="font-size:12px">not drop</text>
+<rect class="sd-alert" x="70" y="150" width="110" height="300" rx="10" fill="none" stroke="#f85149" stroke-width="3"/>
+<rect class="sd-ring" x="222" y="147" width="116" height="306" rx="12" fill="none" stroke="#3fb950" stroke-width="3.5"/>
+<path class="sd-arc" d="M 158 120 C 210 66, 225 62, 280 106" fill="none" stroke="#3fb950" stroke-width="3" stroke-linecap="round" marker-end="url(#sd-ah)"/>
+<g class="sd-act"><rect x="97" y="112" width="56" height="20" rx="10" fill="#f85149"/><text class="sd-pill" style="font-size:12px" x="125" y="126" text-anchor="middle" fill="#0d1117">ACTIVE</text></g>
+<text class="sd-h" x="125" y="476" text-anchor="middle">base</text>
+<text class="sd-s" x="125" y="495" text-anchor="middle" style="fill:#f0f6fc">97%</text>
+<text class="sd-s" x="125" y="512" text-anchor="middle">62 of 64</text>
+<g class="sd-pk"><rect x="240" y="112" width="80" height="22" rx="11" fill="#3fb950"/><text class="sd-pill" style="font-size:13px" x="280" y="128" text-anchor="middle" fill="#0d1117">✓ PICKED</text></g>
+<g class="sd-actC"><rect x="240" y="112" width="80" height="22" rx="11" fill="#3fb950"/><text class="sd-pill" style="font-size:12px" x="280" y="127" text-anchor="middle" fill="#0d1117">ACTIVE</text></g>
+<text class="sd-h" x="280" y="476" text-anchor="middle">coding-4b</text>
+<text class="sd-s" x="280" y="495" text-anchor="middle" style="fill:#f0f6fc">100%</text>
+<text class="sd-s" x="280" y="512" text-anchor="middle">64 of 64, kept</text>
+<g class="sd-mk"><text class="sd-pill" style="font-size:13px" x="435" y="140" text-anchor="middle" fill="#d29922">✕ skipped</text></g>
+<text class="sd-h" x="435" y="476" text-anchor="middle">coding-4b-r2</text>
+<text class="sd-s" x="435" y="495" text-anchor="middle" style="fill:#f0f6fc">72%</text>
+<text class="sd-s" x="435" y="512" text-anchor="middle">46 of 64, rejected</text>
+<text class="sd-head" x="660" y="160">HOW IT DECIDES</text>
+<circle cx="668" cy="196" r="11" fill="#f85149"/><text class="sd-num" x="668" y="200" text-anchor="middle">1</text>
+<text class="sd-h" style="font-size:14.5px" x="688" y="196">Rule frozen first</text>
+<text class="sd-s" x="688" y="214">Written before any model output exists</text>
+<circle cx="668" cy="268" r="11" fill="#d29922"/><text class="sd-num" x="668" y="272" text-anchor="middle">2</text>
+<text class="sd-h" style="font-size:14.5px" x="688" y="268">Compare on identical tasks</text>
+<text class="sd-s" x="688" y="286">Gains and losses tested per task pair</text>
+<circle cx="668" cy="340" r="11" fill="#3fb950"/><text class="sd-num" x="668" y="344" text-anchor="middle">3</text>
+<text class="sd-h" style="font-size:14.5px" x="688" y="340">Keep or reject</text>
+<text class="sd-s" x="688" y="358">Capability anchors must not regress</text>
+<text class="sd-s" x="40" y="556">coding-4b-r2 fixed every tool failure but lost 16 arithmetic answers, so the rule rejected it.</text>
+</svg>
